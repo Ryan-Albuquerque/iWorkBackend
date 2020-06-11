@@ -1,9 +1,16 @@
-const express = require('express')
+const {Router} = require('express')
 
-const route = express.Router()
+const RegisterController = require('./controllers/RegisterController')
+const LoginController = require('./controllers/LoginController')
 
-route.get('/', (req,res)=>{
-    res.send("ola")
-})
+const routes = new Router()
 
-module.exports = route
+//register routes
+routes.post('/signup', RegisterController.create)
+routes.put('/verified/:id', RegisterController.isVerified)
+routes.patch('/update/:id', RegisterController.update)
+
+//login routes
+routes.post('/login', LoginController.login)
+
+module.exports = routes
